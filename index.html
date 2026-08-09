@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato Notes — Internal Knowledge Base</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Zomato Notes</h1>
+        <p>AI-Augmented Internal Knowledge Base</p>
+    </header>
+
+    <nav id="sticky-nav">
+        <div class="nav-group">
+            <input type="text" id="search" placeholder="Search notes (debounced, by keyword)...">
+            <select id="sort">
+                <option value="relevance">Sort by: Relevance</option>
+                <option value="date">Sort by: Date</option>
+            </select>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Requirement 1B.7: Sidebar for the recursive category tree -->
+        <aside id="sidebar">
+            <h2>Category Tree</h2>
+            <div id="treeContainer"></div>
+        </aside>
+
+        <div id="content-area">
+            <!-- Add Note Form -->
+            <section id="add-note-section">
+                <h2>Add New Note</h2>
+                <form id="noteForm">
+                    <input type="text" id="title" placeholder="Note Title" required>
+                    <textarea id="content" placeholder="Note Content..." required></textarea>
+                    <input type="text" id="tag" placeholder="Tag (e.g. work, health)">
+                    <input type="number" id="ownerId" placeholder="Owner ID (e.g. 1)" value="1" required>
+                    <button type="submit" id="submitBtn">Add Note</button>
+                </form>
+                <p id="error" class="error-text"></p>
+            </section>
+
+            <!-- Part 2 Task 4: Quick Tag Jump (linear_search) -->
+            <section id="quick-jump">
+                <h2>Quick Tag Jump</h2>
+                <div class="tag-buttons">
+                    <button class="tag-jump-btn" data-tag="work">Work</button>
+                    <button class="tag-jump-btn" data-tag="health">Health</button>
+                    <button class="tag-jump-btn" data-tag="recipes">Recipes</button>
+                    <button class="tag-jump-btn" data-tag="travel">Travel</button>
+                    <button class="tag-jump-btn" data-tag="random">Random</button>
+                </div>
+                <p id="quickFindResult"></p>
+            </section>
+
+            <!-- Part 2 Task 3: Exact Title Lookup (binary search) -->
+            <section id="lookup-section">
+                <h2>Jump to Exact Title</h2>
+                <div class="input-group">
+                    <input type="text" id="exactTitle" placeholder="Enter exact note title...">
+                    <select id="lookupAlgo">
+                        <option value="iterative">Iterative</option>
+                        <option value="recursive">Recursive</option>
+                    </select>
+                    <button id="findTitle">Jump</button>
+                </div>
+                <p id="lookupResult"></p>
+            </section>
+
+            <!-- Part 3 Task 5: AI Smart Search (semantic, cosine similarity) -->
+            <section id="smart-search-section">
+                <h2>Smart Search (AI)</h2>
+                <div class="input-group">
+                    <input type="text" id="smartInput" placeholder="Describe what you are looking for...">
+                    <button id="smartBtn">AI Search</button>
+                </div>
+                <div id="smartResults"></div>
+            </section>
+
+            <div id="loading" style="display: none;">Loading notes...</div>
+
+            <section id="notes-display">
+                <h2>Notes</h2>
+                <div id="notesContainer">
+                    <!-- Note cards are rendered here dynamically -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Zomato Notes Capstone Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
